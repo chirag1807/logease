@@ -12,8 +12,6 @@ import (
 var excludedWords = []string{
 	"token",
 	"password",
-	"requestMethod",
-	"RequestMethod",
 }
 
 // SendErrorDetailsToTeams is generalized function for sending error log/message to teams.
@@ -65,7 +63,7 @@ func SendErrorDetailsToTeams(r *http.Request, errorStack error, message string, 
 				ActivityTitle: ActivityTitle,
 				Facts: []TeamsMessageFact{
 					{Name: ReqMethod, Value: r.Method},
-					{Name: ReqURL, Value: r.URL.Scheme + "://" + r.URL.Host + r.URL.Path},
+					{Name: ReqURL, Value: r.Host + r.URL.Path},
 					{Name: QueryParams, Value: string(queryParamsString)},
 					{Name: Time, Value: time.Now().Format(time.RFC1123)},
 					{Name: Message, Value: message},
